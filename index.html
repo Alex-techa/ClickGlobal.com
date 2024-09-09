@@ -1,54 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Conexión</title>
+    <title>Sabor del Suelo y Sudor</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>Plataforma de Conexión</h1>
+        <div class="logo">
+            <h1>Sabor del Suelo y Sudor</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Historial</a></li>
+                <li><a href="#">Vende gratis</a></li>
+                <li><a href="#">Ayuda</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar productos, marcas y más...">
+        </div>
     </header>
 
-    <aside id="sidebar">
-        <nav>
-            <a href="#" id="menu-profile">Perfil</a>
-            <a href="#" id="menu-catalog">Catálogo</a>
-            <a href="#" id="menu-options">Opciones</a>
-            <a href="#" id="menu-terms">Términos y Condiciones</a>
-        </nav>
-    </aside>
+    <section class="main-banner">
+        <h2>Descubre los mejores productos agroindustriales</h2>
+        <p>Más de 100 productos del sector primario y agroindustrial para elegir.</p>
+        <button>Ver productos</button>
+    </section>
 
-    <main id="main-content">
-        <div id="profile-section" class="content-section">
-            <h2>Perfil de Usuario</h2>
-            <p>Detalles del perfil aquí...</p>
+    <section class="features">
+        <div class="feature">
+            <img src="img/profile-icon.png" alt="Perfil">
+            <p>Ingresa a tu cuenta</p>
         </div>
+        <div class="feature">
+            <img src="img/shoes-icon.png" alt="Zapatillas">
+            <p>Frutas y verduras</p>
+        </div>
+        <div class="feature">
+            <img src="img/phones-icon.png" alt="Teléfonos">
+            <p>Granos y cereales</p>
+        </div>
+        <div class="feature">
+            <img src="img/category-icon.png" alt="Categorías">
+            <p>Nuestras categorías</p>
+        </div>
+        <div class="feature">
+            <img src="img/delivery-icon.png" alt="Recibe tus compras">
+            <p>Recibe tus compras</p>
+        </div>
+        <div class="feature">
+            <img src="img/sell-icon.png" alt="Vende con nosotros">
+            <p>Vende con nosotros</p>
+        </div>
+    </section>
 
-        <div id="catalog-section" class="content-section" style="display: none;">
-            <h2>Catálogo</h2>
-            <div id="catalog-container"></div>
+    <section id="products">
+        <h2>Productos de Agroindustria</h2>
+        <div class="product-list">
+            <!-- Aquí se mostrarán los productos -->
         </div>
+    </section>
 
-        <div id="options-section" class="content-section" style="display: none;">
-            <h2>Opciones</h2>
-            <label for="theme-switch">Cambiar Iluminación:</label>
-            <select id="theme-switch">
-                <option value="light">Blanco</option>
-                <option value="dark">Negro</option>
-            </select>
-        </div>
-
-        <div id="terms-section" class="content-section" style="display: none;">
-            <h2>Términos y Condiciones</h2>
-            <p id="terms-text">Aquí van los términos y condiciones redactados.</p>
-        </div>
-    </main>
+    <footer>
+        <p>&copy; 2024 Sabor del Suelo y Sudor. Todos los derechos reservados.</p>
+    </footer>
 
     <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
 </body>
 </html>
