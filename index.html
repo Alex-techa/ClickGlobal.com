@@ -1,187 +1,54 @@
-
-        <!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Sabor Del Sol</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Plataforma de Conexión</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-    <!-- Encabezado con navegación -->
     <header>
-        <h1>Marketplace Agroindustrial</h1>
-        <nav>
-            <ul>
-                <li><button data-tab="inicio">Inicio</button></li>
-                <li><button data-tab="productos">Productos</button></li>
-                <li><button data-tab="perfil">Perfil</button></li>
-                <li><button data-tab="registro">Registro/Inicio</button></li>
-                <li><button data-tab="contacto">Contacto</button></li>
-                <li><button data-tab="terminos">Términos y Condiciones</button></li>
-            </ul>
-        </nav>
+        <h1>Plataforma de Conexión</h1>
     </header>
 
-    <!-- Secciones de Pestañas -->
-    <main>
-        <!-- Sección de Inicio -->
-        <section id="inicio" class="tab-content active">
-            <div class="section-container">
-                <h2>Bienvenido a El Sabor Del Sol</h2>
-                <p>Compra y vende productos de alta calidad de la agroindustria con facilidad. Explora nuestra variedad de productos y descubre visualizaciones en 3D para una mejor experiencia de compra.</p>
-            </div>
-        </section>
+    <aside id="sidebar">
+        <nav>
+            <a href="#" id="menu-profile">Perfil</a>
+            <a href="#" id="menu-catalog">Catálogo</a>
+            <a href="#" id="menu-options">Opciones</a>
+            <a href="#" id="menu-terms">Términos y Condiciones</a>
+        </nav>
+    </aside>
 
-        <!-- Sección de Productos -->
-        <section id="productos" class="tab-content">
-            <div class="section-container">
-                <h2>Productos Disponibles</h2>
-                <input type="text" id="search" placeholder="Buscar productos..." />
-                <div class="content">
-                    <div id="product-viewer">
-                        <h3>Visualizador 3D de Producto</h3>
-                        <div id="canvas-container"></div>
-                    </div>
+    <main id="main-content">
+        <div id="profile-section" class="content-section">
+            <h2>Perfil de Usuario</h2>
+            <p>Detalles del perfil aquí...</p>
+        </div>
 
-                    <div id="product-list">
-                        <ul id="products">
-                            <li data-product="arroz">Arroz - $25 / saco</li>
-                            <li data-product="frijol">Frijol - $30 / saco</li>
-                            <li data-product="maiz">Maíz - $22 / quintal</li>
-                            <li data-product="queso">Queso - $40 / bloque</li>
-                            <li data-product="cacao">Cacao - $50 / quintal</li>
-                            <li data-product="leche">Leche - $15 / galón</li>
-                            <li data-product="miel">Miel - $10 / frasco</li>
-                            <li data-product="cafe">Café - $35 / saco</li>
-                            <li data-product="yuca">Yuca - $18 / quintal</li>
-                            <li data-product="platano">Plátano - $12 / racimo</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div id="catalog-section" class="content-section" style="display: none;">
+            <h2>Catálogo</h2>
+            <div id="catalog-container"></div>
+        </div>
 
-        <!-- Sección de Registro e Inicio de Sesión -->
-        <section id="registro" class="tab-content">
-            <div class="section-container">
-                <h2>Registro/Inicio de Sesión</h2>
-                <form id="loginForm">
-                    <label for="username">Nombre de Usuario:</label>
-                    <input type="text" id="username" name="username" required>
+        <div id="options-section" class="content-section" style="display: none;">
+            <h2>Opciones</h2>
+            <label for="theme-switch">Cambiar Iluminación:</label>
+            <select id="theme-switch">
+                <option value="light">Blanco</option>
+                <option value="dark">Negro</option>
+            </select>
+        </div>
 
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
-
-                    <button type="button" id="loginButton">Iniciar Sesión</button>
-                    <p id="registerLink">¿No tienes cuenta? <a href="#" id="register">Regístrate aquí</a></p>
-                </form>
-
-                <!-- Formulario de Registro -->
-                <form id="registerForm" style="display:none;">
-                    <label for="newUsername">Nombre de Usuario:</label>
-                    <input type="text" id="newUsername" name="newUsername" required>
-
-                    <label for="newPassword">Contraseña:</label>
-                    <input type="password" id="newPassword" name="newPassword" required>
-
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <button type="button" id="registerButton">Registrarse</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Sección de Perfil -->
-        <section id="perfil" class="tab-content">
-            <div class="section-container">
-                <h2>Perfil de Usuario</h2>
-                <p><strong>Nombre de Usuario:</strong> <span id="profileUsername"></span></p>
-                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-            </div>
-        </section>
-
-        <!-- Sección de Contacto -->
-        <section id="contacto" class="tab-content">
-            <div class="section-container">
-                <h2>Contacto</h2>
-                <p>¿Tienes alguna pregunta o necesitas ayuda? Contáctanos a través del siguiente formulario.</p>
-                <form>
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="mensaje">Mensaje:</label>
-                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-
-                    <button type="submit">Enviar</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Sección de Términos y Condiciones -->
-        <section id="terminos" class="tab-content">
-            <div class="section-container">
-                <h2>Términos y Condiciones</h2>
-                <p>A continuación, se detallan los términos y condiciones de uso de nuestra plataforma...</p>
-            </div>
-        </section>
+        <div id="terms-section" class="content-section" style="display: none;">
+            <h2>Términos y Condiciones</h2>
+            <p id="terms-text">Aquí van los términos y condiciones redactados.</p>
+        </div>
     </main>
 
-    <!-- Pie de Página -->
-    <footer>
-        <p>© 2024 AgroIndustria Nicaragua</p>
-    </footer>
-
-    <!-- Librerías y Scripts -->
+    <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
 </body>
-<!-- Botón de Carrito de Compras -->
-<header>
-    <h1>Marketplace Agroindustrial</h1>
-    <nav>
-        <ul>
-            <li><button data-tab="inicio">Inicio</button></li>
-            <li><button data-tab="productos">Productos</button></li>
-            <li><button data-tab="perfil">Perfil</button></li>
-            <li><button data-tab="contacto">Contacto</button></li>
-            <li><button data-tab="terminos">Términos y Condiciones</button></li>
-            <li><button id="carrito">🛒 Carrito (<span id="carrito-count">0</span>)</button></li>
-        </ul>
-    </nav>
-</header>
-
-<!-- Sección de Productos: Añadir botón de "Agregar al carrito" -->
-<section id="productos" class="tab-content">
-    <div class="section-container">
-        <h2>Productos Disponibles</h2>
-        <input type="text" id="search" placeholder="Buscar productos..." />
-        <div class="content">
-            <div id="product-viewer">
-                <h3>Visualizador 3D de Producto</h3>
-                <div id="canvas-container"></div>
-            </div>
-
-            <div id="product-list">
-                <ul id="products">
-                    <li data-product="arroz">Arroz - $25 / saco <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="frijol">Frijol - $30 / saco <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="maiz">Maíz - $22 / quintal <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="queso">Queso - $40 / bloque <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="cacao">Cacao - $50 / quintal <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="leche">Leche - $15 / galón <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="miel">Miel - $10 / frasco <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="cafe">Café - $35 / saco <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="yuca">Yuca - $18 / quintal <button class="add-to-cart">Agregar al carrito</button></li>
-                    <li data-product="platano">Plátano - $12 / racimo <button class="add-to-cart">Agregar al carrito</button></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
 </html>
