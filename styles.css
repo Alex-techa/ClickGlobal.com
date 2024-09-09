@@ -180,4 +180,64 @@ footer {
     #product-viewer, #product-list {
         width: 100%;
     }
+/* Carrito de compras */
+#carrito {
+    position: relative;
+    font-size: 1.2em;
+    background-color: #66bb6a;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+#carrito-count {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.add-to-cart {
+    background-color: #2e7d32;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #66bb6a;
+}
+
+/* Notificaciones */
+#notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #66bb6a;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+}
+
+.show-notification {
+    display: block;
+    animation: fadeout 4s forwards;
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
