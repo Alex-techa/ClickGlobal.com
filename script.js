@@ -1,112 +1,78 @@
-// Configuración del Visualizador 3D usando Three.js
-let scene, camera, renderer, currentProduct;
+// Script para cambiar entre pestañas
+document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll("nav button");
+    const tabContent = document.querySelectorAll(".tab-content");
 
-function init() {
-    const canvasContainer = document.getElementById('canvas-container');
+    buttons.forEach(button => {
+        button.addEventListener("click", function () {
+            // Remove active class from all tab contents
+            tabContent.forEach(tab => tab.classList.remove("active"));
 
-    // Crear escena
-    scene = new THREE.Scene();
+            // Add active class to the selected tab
+            const tabToShow = document.getElementById(this.dataset.tab);
+            tabToShow.classList.add("active");
+        });
+    });
+});
 
-    // Crear cámara
-    camera = new THREE.PerspectiveCamera(75, canvasContainer.clientWidth / 400, 0.1, 1000);
-    camera.position.z = 5;
+// Filtro de búsqueda de productos
+const searchInput = document.getElementById("search");
+const productsList = document.getElementById("products").children;
 
-    // Crear renderizador
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(canvasContainer.clientWidth, 400);
-    canvasContainer.appendChild(renderer.domElement);
+searchInput.addEventListener("keyup", function () {
+    const filter = this.value.toLowerCase();
 
-    // Añadir luz
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    scene.add(ambientLight);
+    for (let product of productsList) {
+        const productName = product.textContent.toLowerCase();
 
-    // Cargar el primer producto por defecto
-    loadProduct('arroz');
-
-    animate();
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    // Rotar el objeto 3D
-    if (currentProduct) {
-        currentProduct.rotation.x += 0.01;
-        currentProduct.rotation.y += 0.01;
+        if (productName.includes(filter)) {
+            product.style.display = "";
+        } else {
+            product.style.display = "none";
+        }
     }
+});
 
-    renderer.render(scene, camera);
-}
+// Registro e inicio de sesión interactivo
+let userData = {};
 
-function loadProduct(product) {
-    // Limpiar la escena
-    while (scene.children.length > 1) { // Mantener la luz
-        scene.remove(scene.children[scene.children.length - 1]);
-    }
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+const profileUsername = document.getElementById("profileUsername");
+const profileEmail = document.getElementById("profileEmail");
 
-    // Definir colores para cada producto (solo como ejemplo)
-    const colors = {
-        arroz: 0xFFFFFF,
-        frijol: 0x8B4513,
-        maiz: 0xFFD700,
-        queso: 0xFFFFE0,
-        cacao: 0x4B0082,
-        leche: 0xFFFFFF,
-        miel: 0xFFB300,
-        cafe: 0x6F4E37,
-        yuca: 0xDEB887,
-        platano: 0xFFFF00
-    };
+document.getElementById("register").addEventListener("click", function () {
+    loginForm.style.display = "none";
+    registerForm.style.display = "block";
+});
 
-    // Crear geometría y material basado en el producto
-    let geometry;
-    switch(product) {
-        case 'arroz':
-            geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
-            break;
-        case 'frijol':
-            geometry = new THREE.DodecahedronGeometry(1);
-            break;
-        case 'maiz':
-            geometry = new THREE.ConeGeometry(1, 2, 32);
-            break;
-        case 'queso':
-            geometry = new THREE.BoxGeometry(1.5, 1, 1);
-            break;
-        case 'cacao':
-            geometry = new THREE.IcosahedronGeometry(1);
-            break;
-        case 'leche':
-            geometry = new THREE.SphereGeometry(1, 32, 32);
-            break;
-        case 'miel':
-            geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
-            break;
-        case 'cafe':
-            geometry = new THREE.OctahedronGeometry(1);
-            break;
-        case 'yuca':
-            geometry = new THREE.CylinderGeometry(0.8, 0.8, 2.5, 32);
-            break;
-        case 'platano':
-            geometry = new THREE.TorusGeometry(1, 0.3, 16, 100);
-            break;
-        default:
-            geometry = new THREE.BoxGeometry();
-    }
+document.getElementById("registerButton").addEventListener("click", function () {
+    const newUsername = document.getElementById("newUsername").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const email = document.getElementById("email").value;
 
-    const material = new THREE.MeshStandardMaterial({ color: colors[product] || 0x4caf50 });
-    currentProduct = new THREE.Mesh(geometry, material);
-    scene.add(currentProduct);
-}
+    // Guardar datos de registro
+    userData = { username: newUsername, password: newPassword, email: email };
 
-// Inicializar visualizador 3D al cargar la página
-window.onload = init;
+    // Mostrar información en el perfil
+    profileUsername.textContent = userData.username;
+    profileEmail.textContent = userData.email;
 
-// Manejar clics en la lista de productos
-document.getElementById('products').addEventListener('click', function(e) {
-    const product = e.target.dataset.product;
-    if (product) {
-        loadProduct(product);
+    // Volver a la pantalla de inicio de sesión
+    registerForm.style.display = "none";
+    loginForm.style.display = "block";
+});
+
+document.getElementById("loginButton").addEventListener("click", function () {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Validación simple
+    if (userData.username === username && userData.password === password) {
+        profileUsername.textContent = userData.username;
+        profileEmail.textContent = userData.email;
+        alert("Inicio de sesión exitoso.");
+    } else {
+        alert("Nombre de usuario o contraseña incorrectos.");
     }
 });
