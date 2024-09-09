@@ -1,73 +1,183 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll("nav button");
-    const tabContent = document.querySelectorAll(".tab-content");
-
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            tabContent.forEach(tab => tab.classList.remove("active"));
-            const tabToShow = document.getElementById(this.dataset.tab);
-            tabToShow.classList.add("active");
-        });
-    });
-});
-
-// Filtro de búsqueda
-const searchInput = document.getElementById("search");
-const productsList = document.getElementById("products").children;
-
-searchInput.addEventListener("keyup", function () {
-    const filter = this.value.toLowerCase();
-
-    for (let product of productsList) {
-        const productName = product.textContent.toLowerCase();
-
-        if (productName.includes(filter)) {
-            product.style.display = "";
-        } else {
-            product.style.display = "none";
-        }
-    }
-});
-
-// Función para inicializar visualizadores 3D por producto
-function init3DViewer(productId, shape) {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 300 / 300, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(300, 300);
-    document.getElementById(`viewer-${productId}`).appendChild(renderer.domElement);
-
-    let geometry;
-    switch (shape) {
-        case 'sphere': // Por ejemplo, para frijol
-            geometry = new THREE.SphereGeometry(1, 32, 32);
-            break;
-        case 'box': // Por ejemplo, para arroz o maíz
-            geometry = new THREE.BoxGeometry(1, 1, 1);
-            break;
-        case 'cylinder': // Para otros productos
-            geometry = new THREE.CylinderGeometry(0.5, 0.5, 1.5, 32);
-            break;
-        default:
-            geometry = new THREE.BoxGeometry(1, 1, 1);
-    }
-
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const object = new THREE.Mesh(geometry, material);
-    scene.add(object);
-
-    camera.position.z = 5;
-
-    function animate() {
-        requestAnimationFrame(animate);
-        object.rotation.x += 0.01;
-        object.rotation.y += 0.01;
-        renderer.render(scene, camera);
-    }
-    animate();
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// Inicialización de visualizadores para cada producto
-init3DViewer('arroz', 'box');
-init3DViewer('frijol', 'sphere');
-init3DViewer('maiz', 'box');
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+    background-color: #2e7d32;
+    color: white;
+    padding: 1.5em;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin-bottom: 0.5em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #a5d6a7;
+}
+
+/* Secciones */
+section {
+    padding: 60px 20px;
+    background-color: #fff;
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+section:nth-of-type(even) {
+    background-color: #e8f5e9;
+}
+
+h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Sección de Productos */
+#productos .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#product-viewer {
+    width: 60%;
+    min-width: 300px;
+}
+
+#product-viewer h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#canvas-container {
+    width: 100%;
+    height: 400px;
+    background-color: #e8f5e9;
+    border: 2px solid #81c784;
+    border-radius: 10px;
+}
+
+#product-list {
+    width: 35%;
+    min-width: 250px;
+    margin-top: 20px;
+}
+
+#product-list ul {
+    list-style: none;
+}
+
+#product-list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #a5d6a7;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #2e7d32;
+    transition: background-color 0.3s ease;
+}
+
+#product-list li:hover {
+    background-color: #66bb6a;
+}
+
+/* Formulario de Contacto */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+}
+
+form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #1b5e20;
+}
+
+/* Pie de Página */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2e7d32;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    #productos .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #product-viewer, #product-list {
+        width: 100%;
+    }
+}
