@@ -7,93 +7,100 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Encabezado con navegación -->
+    <!-- Encabezado con navegación y logo -->
     <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo de Marketplace" id="logo">
+        </div>
         <h1>Marketplace Agroindustrial</h1>
         <nav>
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#perfil">Perfil</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#terminos">Términos y Condiciones</a></li>
+                <li><button data-tab="inicio">Inicio</button></li>
+                <li><button data-tab="productos">Productos</button></li>
+                <li><button data-tab="perfil">Perfil</button></li>
+                <li><button data-tab="contacto">Contacto</button></li>
+                <li><button data-tab="terminos">Términos y Condiciones</button></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Sección de Inicio -->
-    <section id="inicio">
-        <div class="section-container">
-            <h2>Bienvenido al Marketplace Agroindustrial</h2>
-            <p>Compra y vende productos de alta calidad de la agroindustria con facilidad. Explora nuestra variedad de productos y descubre visualizaciones en 3D para una mejor experiencia de compra.</p>
-        </div>
-    </section>
+    <!-- Secciones de Pestañas -->
+    <main>
+        <!-- Sección de Inicio -->
+        <section id="inicio" class="tab-content active">
+            <div class="section-container">
+                <h2>Bienvenido al Marketplace Agroindustrial</h2>
+                <p>Compra y vende productos de alta calidad de la agroindustria con facilidad. Explora nuestra variedad de productos y descubre visualizaciones en 3D para una mejor experiencia de compra.</p>
+            </div>
+        </section>
 
-    <!-- Sección de Productos -->
-    <section id="productos">
-        <div class="section-container">
-            <h2>Productos Disponibles</h2>
-            <div class="content">
-                <div id="product-viewer">
-                    <h3>Visualizador 3D de Producto</h3>
-                    <div id="canvas-container"></div>
-                </div>
+        <!-- Sección de Productos -->
+        <section id="productos" class="tab-content">
+            <div class="section-container">
+                <h2>Productos Disponibles</h2>
+                <input type="text" id="search" placeholder="Buscar productos..." />
+                <div class="content">
+                    <div id="product-viewer">
+                        <h3>Visualizador 3D de Producto</h3>
+                        <div id="canvas-container"></div>
+                    </div>
 
-                <div id="product-list">
-                    <ul id="products">
-                        <li data-product="arroz">Arroz - $25 / saco</li>
-                        <li data-product="frijol">Frijol - $30 / saco</li>
-                        <li data-product="maiz">Maíz - $22 / quintal</li>
-                        <li data-product="queso">Queso - $40 / bloque</li>
-                        <li data-product="cacao">Cacao - $50 / quintal</li>
-                        <li data-product="leche">Leche - $15 / galón</li>
-                        <li data-product="miel">Miel - $10 / frasco</li>
-                        <li data-product="cafe">Café - $35 / saco</li>
-                        <li data-product="yuca">Yuca - $18 / quintal</li>
-                        <li data-product="platano">Plátano - $12 / racimo</li>
-                    </ul>
+                    <div id="product-list">
+                        <ul id="products">
+                            <li data-product="arroz">
+                                Arroz - $25 / saco
+                                <p>Descripción: El arroz de mejor calidad, directo del campo.</p>
+                                <button class="buy-btn">Comprar</button>
+                                <button class="sell-btn">Vender</button>
+                            </li>
+                            <li data-product="frijol">
+                                Frijol - $30 / saco
+                                <p>Descripción: Frijol orgánico, cultivado de manera sostenible.</p>
+                                <button class="buy-btn">Comprar</button>
+                                <button class="sell-btn">Vender</button>
+                            </li>
+                            <!-- Agrega más productos aquí -->
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sección de Perfil -->
-    <section id="perfil">
-        <div class="section-container">
-            <h2>Perfil de Usuario</h2>
-            <p>Aquí puedes gestionar tu perfil, ver tus compras y ventas, y actualizar tu información personal.</p>
-            <!-- Contenido adicional del perfil puede ir aquí -->
-        </div>
-    </section>
+        <!-- Sección de Perfil -->
+        <section id="perfil" class="tab-content">
+            <div class="section-container">
+                <h2>Perfil de Usuario</h2>
+                <p id="perfil-info">Aquí puedes gestionar tu perfil, ver tus compras y ventas, y actualizar tu información personal.</p>
+            </div>
+        </section>
 
-    <!-- Sección de Contacto -->
-    <section id="contacto">
-        <div class="section-container">
-            <h2>Contacto</h2>
-            <p>¿Tienes alguna pregunta o necesitas ayuda? Contáctanos a través del siguiente formulario.</p>
-            <form>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+        <!-- Sección de Contacto -->
+        <section id="contacto" class="tab-content">
+            <div class="section-container">
+                <h2>Contacto</h2>
+                <form>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
 
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" required>
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
 
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
 
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
-    </section>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </section>
 
-    <!-- Sección de Términos y Condiciones -->
-    <section id="terminos">
-        <div class="section-container">
-            <h2>Términos y Condiciones</h2>
-            <p>A continuación, se detallan los términos y condiciones de uso de nuestra plataforma...</p>
-            <!-- Contenido detallado de los términos y condiciones -->
-        </div>
-    </section>
+        <!-- Sección de Términos y Condiciones -->
+        <section id="terminos" class="tab-content">
+            <div class="section-container">
+                <h2>Términos y Condiciones</h2>
+                <p>A continuación, se detallan los términos y condiciones de uso de nuestra plataforma...</p>
+            </div>
+        </section>
+    </main>
 
     <!-- Pie de Página -->
     <footer>
