@@ -140,4 +140,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="app.js"></script>
 </body>
+<!-- Botón de Carrito de Compras -->
+<header>
+    <h1>Marketplace Agroindustrial</h1>
+    <nav>
+        <ul>
+            <li><button data-tab="inicio">Inicio</button></li>
+            <li><button data-tab="productos">Productos</button></li>
+            <li><button data-tab="perfil">Perfil</button></li>
+            <li><button data-tab="contacto">Contacto</button></li>
+            <li><button data-tab="terminos">Términos y Condiciones</button></li>
+            <li><button id="carrito">🛒 Carrito (<span id="carrito-count">0</span>)</button></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Sección de Productos: Añadir botón de "Agregar al carrito" -->
+<section id="productos" class="tab-content">
+    <div class="section-container">
+        <h2>Productos Disponibles</h2>
+        <input type="text" id="search" placeholder="Buscar productos..." />
+        <div class="content">
+            <div id="product-viewer">
+                <h3>Visualizador 3D de Producto</h3>
+                <div id="canvas-container"></div>
+            </div>
+
+            <div id="product-list">
+                <ul id="products">
+                    <li data-product="arroz">Arroz - $25 / saco <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="frijol">Frijol - $30 / saco <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="maiz">Maíz - $22 / quintal <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="queso">Queso - $40 / bloque <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="cacao">Cacao - $50 / quintal <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="leche">Leche - $15 / galón <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="miel">Miel - $10 / frasco <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="cafe">Café - $35 / saco <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="yuca">Yuca - $18 / quintal <button class="add-to-cart">Agregar al carrito</button></li>
+                    <li data-product="platano">Plátano - $12 / racimo <button class="add-to-cart">Agregar al carrito</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 </html>
