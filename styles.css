@@ -1,0 +1,144 @@
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Encabezado y navegación */
+header {
+    background-color: #2e7d32;
+    color: white;
+    padding: 1.5em;
+    text-align: center;
+}
+
+#logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#logo {
+    width: 150px;
+}
+
+header h1 {
+    margin-bottom: 0.5em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+nav ul li button:hover {
+    color: #a5d6a7;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* Secciones */
+.tab-content {
+    display: none;
+    padding: 2em;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.section-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    display: flex;
+    gap: 20px;
+}
+
+#inicio, #registro {
+    flex: 1;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #66bb6a;
+}
+
+/* Sección de Productos */
+.product {
+    margin-bottom: 40px;
+}
+
+.product-description {
+    margin-bottom: 10px;
+}
+
+.product-3d {
+    width: 300px;
+    height: 300px;
+    background-color: #e0e0e0;
+}
+
+/* Pie de página */
+footer {
+    background-color: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SABOR DEL SOL</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Encabezado con navegación -->
+    <header>
+        <div id="logo-container">
+            <img src="FOTOS/WhatsApp Image 2024-09-08 at 10.43.04 AM.jpeg" alt="Logo del Marketplace Agroindustrial" id="logo">
+        </div>
+        <h1>Marketplace Agroindustrial</h1>
+        <nav>
+            <ul>
+                <li><button data-tab="inicio-registro">Inicio</button></li>
+                <li><button data-tab="productos">Productos</button></li>
+                <li><button data-tab="perfil">Perfil</button></li>
+                <li><button data-tab="contacto-terminos">Contacto y Términos</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Secciones de Pestañas -->
+    <main>
+        <!-- Sección de Inicio y Registro combinada -->
+        <section id="inicio-registro" class="tab-content active">
+            <div class="section-container">
+                <h2>Bienvenido al Marketplace Agroindustrial</h2>
+                <p>Compra y vende productos de alta calidad de la agroindustria con facilidad. Explora nuestra variedad de productos y descubre visualizaciones en 3D para una mejor experiencia de compra.</p>
+                
+                <div class="form-container">
+                    <div id="inicio">
+                        <h3>Inicio de Sesión</h3>
+                        <form id="login-form">
+                            <label for="email-login">Correo Electrónico:</label>
+                            <input type="email" id="email-login" name="email" required>
+                            
+                            <label for="password-login">Contraseña:</label>
+                            <input type="password" id="password-login" name="password" required>
+                            
+                            <button type="submit">Iniciar Sesión</button>
+                        </form>
+                    </div>
+
+                    <div id="registro">
+                        <h3>Registro de Usuario</h3>
+                        <form id="registro-form">
+                            <label for="nombre-registro">Nombre:</label>
+                            <input type="text" id="nombre-registro" name="nombre" required>
+                            
+                            <label for="email-registro">Correo Electrónico:</label>
+                            <input type="email" id="email-registro" name="email" required>
+                            
+                            <label for="password-registro">Contraseña:</label>
+                            <input type="password" id="password-registro" name="password" required>
+                            
+                            <button type="submit">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Perfil -->
+        <section id="perfil" class="tab-content">
+            <div class="section-container">
+                <h2>Perfil de Usuario</h2>
+                <p><strong>Nombre:</strong> <span id="nombre-perfil"></span></p>
+                <p><strong>Correo Electrónico:</strong> <span id="email-perfil"></span></p>
+            </div>
+        </section>
+
+        <!-- Sección de Productos -->
+        <section id="productos" class="tab-content">
+            <div class="section-container">
+                <h2>Productos</h2>
+                <div class="product" id="product-arroz">
+                    <div class="product-description">
+                        <h3>Arroz</h3>
+                        <p>Descripción del arroz.</p>
+                        <button>Comprar</button>
+                        <button>Vender</button>
+                    </div>
+                    <div class="product-3d" id="viewer-arroz"></div>
+                </div>
+                <div class="product" id="product-frijol">
+                    <div class="product-description">
+                        <h3>Frijol</h3>
+                        <p>Descripción del frijol.</p>
+                        <button>Comprar</button>
+                        <button>Vender</button>
+                    </div>
+                    <div class="product-3d" id="viewer-frijol"></div>
+                </div>
+                <div class="product" id="product-maiz">
+                    <div class="product-description">
+                        <h3>Maíz</h3>
+                        <p>Descripción del maíz.</p>
+                        <button>Comprar</button>
+                        <button>Vender</button>
+                    </div>
+                    <div class="product-3d" id="viewer-maiz"></div>
+                </div>
+                <!-- Agrega más productos aquí -->
+            </div>
+        </section>
+
+        <!-- Sección de Contacto y Términos combinadas -->
+        <section id="contacto-terminos" class="tab-content">
+            <div class="section-container">
+                <div id="contacto">
+                    <h2>Contacto</h2>
+                    <p>Para cualquier consulta, puedes ponerte en contacto con nosotros a través del siguiente correo electrónico: contacto@marketplace.com</p>
+                </div>
+
+                <div id="terminos">
+                    <h2>Términos y Condiciones</h2>
+                    <p>1. Aceptación de los Términos
+
+                        Al utilizar nuestra plataforma de Marketplace Agroindustrial, aceptas estos términos y condiciones. Si no estás de acuerdo con alguno de estos términos, por favor, no uses nuestro sitio web.
+                        
+                        2. Uso del Sitio
+                        
+                        Nuestro marketplace está destinado a la compra y venta de productos agroindustriales. Solo puedes usar nuestra plataforma para fines legales y de acuerdo con estos términos. Prohibimos el uso del sitio para actividades fraudulentas, ilegales o no autorizadas.
+                        
+                        3. Registro de Usuario
+                        
+                        Para acceder a ciertas funciones del marketplace, deberás registrarte y proporcionar información verídica y precisa. Eres responsable de mantener la confidencialidad de tu cuenta y contraseña, y de todas las actividades que ocurran bajo tu cuenta.
+                        
+                        4. Publicación de Productos
+                        
+                        Los usuarios pueden publicar productos para la venta. Eres responsable de la precisión y veracidad de la información sobre los productos que publicas, incluyendo descripciones, precios y disponibilidad. No somos responsables de las discrepancias en la información proporcionada por los usuarios.
+                        
+                        5. Compra y Venta
+                        
+                        Las transacciones realizadas a través de nuestro marketplace se realizan entre el comprador y el vendedor. No somos parte de las transacciones y no garantizamos la calidad, seguridad o legalidad de los productos ofrecidos. Cualquier disputa debe ser resuelta directamente entre las partes involucradas.
+                        
+                        6. Propiedad Intelectual
+                        
+                        Todos los derechos de propiedad intelectual en el sitio web y el contenido, incluidos los visualizadores 3D, son propiedad de nosotros o de nuestros licenciantes. No puedes reproducir, distribuir, modificar ni crear trabajos derivados de cualquier contenido sin nuestro permiso previo.
+                        
+                        7. Protección de Datos
+                        
+                        Nos comprometemos a proteger tu privacidad. La información personal que recolectamos se utiliza de acuerdo con nuestra política de privacidad. Al utilizar nuestro sitio, aceptas la recolección y uso de tu información de acuerdo con dicha política.
+                        
+                        8. Modificaciones al Sitio y Términos
+                        
+                        Nos reservamos el derecho de modificar o actualizar estos términos y condiciones en cualquier momento. Las modificaciones entrarán en vigor una vez publicadas en el sitio. Es tu responsabilidad revisar los términos periódicamente.
+                        
+                        9. Limitación de Responsabilidad
+                        
+                        No seremos responsables de ningún daño directo, indirecto, incidental, especial o consecuente que surja del uso del sitio o de la imposibilidad de usar el sitio, incluso si hemos sido advertidos de la posibilidad de dichos daños.
+                        
+                        10. Ley Aplicable
+                        
+                        Estos términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país en el que operamos, sin dar efecto a sus principios de conflicto de leyes.
+                        
+                        11. Contacto
+                        
+                        Para cualquier pregunta sobre estos términos y condiciones, puedes contactarnos a través del correo electrónico: contacto@marketplace.com.
+                        
+                        </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>© 2024 AgroIndustria Nicaragua</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
