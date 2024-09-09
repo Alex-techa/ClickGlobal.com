@@ -23,6 +23,7 @@ searchInput.addEventListener("keyup", function () {
     const filter = this.value.toLowerCase();
 
     for (let product of productsList) {
+        
         const productName = product.textContent.toLowerCase();
 
         if (productName.includes(filter)) {
@@ -74,5 +75,57 @@ document.getElementById("loginButton").addEventListener("click", function () {
         alert("Inicio de sesión exitoso.");
     } else {
         alert("Nombre de usuario o contraseña incorrectos.");
+    }document.addEventListener("DOMContentLoaded", function () {
+    // Cambiar entre pestañas
+    const buttons = document.querySelectorAll("nav button");
+    const tabContent = document.querySelectorAll(".tab-content");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", function () {
+            tabContent.forEach(tab => tab.classList.remove("active"));
+            const tabToShow = document.getElementById(this.dataset.tab);
+            if (tabToShow) tabToShow.classList.add("active");
+        });
+    });
+
+    // Carrito de compras
+    let carritoCount = 0;
+    const carritoCountElem = document.getElementById("carrito-count");
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+    const notification = document.createElement("div");
+    notification.id = "notification";
+    document.body.appendChild(notification);
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            carritoCount++;
+            carritoCountElem.textContent = carritoCount;
+
+            // Mostrar notificación
+            showNotification("Producto agregado al carrito");
+        });
+    });
+
+    function showNotification(message) {
+        notification.textContent = message;
+        notification.classList.add("show-notification");
+
+        setTimeout(() => {
+            notification.classList.remove("show-notification");
+        }, 4000);
     }
+
+    // Filtro de búsqueda
+    const searchInput = document.getElementById("search");
+    const productsList = document.getElementById("products").children;
+
+    searchInput.addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+        for (let product of productsList) {
+            const productName = product.textContent.toLowerCase();
+            product.style.display = productName.includes(filter) ? "" : "none";
+        }
+    });
+});
+
 });
