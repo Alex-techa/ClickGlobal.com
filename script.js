@@ -1,131 +1,85 @@
-// Script para cambiar entre pestañas
-document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll("nav button");
-    const tabContent = document.querySelectorAll(".tab-content");
-
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            // Remove active class from all tab contents
-            tabContent.forEach(tab => tab.classList.remove("active"));
-
-            // Add active class to the selected tab
-            const tabToShow = document.getElementById(this.dataset.tab);
-            tabToShow.classList.add("active");
-        });
-    });
-});
-
-// Filtro de búsqueda de productos
-const searchInput = document.getElementById("search");
-const productsList = document.getElementById("products").children;
-
-searchInput.addEventListener("keyup", function () {
-    const filter = this.value.toLowerCase();
-
-    for (let product of productsList) {
-        
-        const productName = product.textContent.toLowerCase();
-
-        if (productName.includes(filter)) {
-            product.style.display = "";
-        } else {
-            product.style.display = "none";
-        }
-    }
-});
-
-// Registro e inicio de sesión interactivo
-let userData = {};
-
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
-const profileUsername = document.getElementById("profileUsername");
-const profileEmail = document.getElementById("profileEmail");
-
-document.getElementById("register").addEventListener("click", function () {
-    loginForm.style.display = "none";
-    registerForm.style.display = "block";
-});
-
-document.getElementById("registerButton").addEventListener("click", function () {
-    const newUsername = document.getElementById("newUsername").value;
-    const newPassword = document.getElementById("newPassword").value;
-    const email = document.getElementById("email").value;
-
-    // Guardar datos de registro
-    userData = { username: newUsername, password: newPassword, email: email };
-
-    // Mostrar información en el perfil
-    profileUsername.textContent = userData.username;
-    profileEmail.textContent = userData.email;
-
-    // Volver a la pantalla de inicio de sesión
-    registerForm.style.display = "none";
-    loginForm.style.display = "block";
-});
-
-document.getElementById("loginButton").addEventListener("click", function () {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    // Validación simple
-    if (userData.username === username && userData.password === password) {
-        profileUsername.textContent = userData.username;
-        profileEmail.textContent = userData.email;
-        alert("Inicio de sesión exitoso.");
-    } else {
-        alert("Nombre de usuario o contraseña incorrectos.");
-    }document.addEventListener("DOMContentLoaded", function () {
-    // Cambiar entre pestañas
-    const buttons = document.querySelectorAll("nav button");
-    const tabContent = document.querySelectorAll(".tab-content");
-
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            tabContent.forEach(tab => tab.classList.remove("active"));
-            const tabToShow = document.getElementById(this.dataset.tab);
-            if (tabToShow) tabToShow.classList.add("active");
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    const profileSection = document.getElementById('profile-section');
+    const catalogSection = document.getElementById('catalog-section');
+    const optionsSection = document.getElementById('options-section');
+    const termsSection = document.getElementById('terms-section');
+    const catalogContainer = document.getElementById('catalog-container');
+    const themeSwitch = document.getElementById('theme-switch');
+    
+    document.getElementById('menu-profile').addEventListener('click', () => {
+        showSection(profileSection);
     });
 
-    // Carrito de compras
-    let carritoCount = 0;
-    const carritoCountElem = document.getElementById("carrito-count");
-    const addToCartButtons = document.querySelectorAll(".add-to-cart");
-    const notification = document.createElement("div");
-    notification.id = "notification";
-    document.body.appendChild(notification);
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            carritoCount++;
-            carritoCountElem.textContent = carritoCount;
-
-            // Mostrar notificación
-            showNotification("Producto agregado al carrito");
-        });
+    document.getElementById('menu-catalog').addEventListener('click', () => {
+        showSection(catalogSection);
+        loadCatalog();
     });
 
-    function showNotification(message) {
-        notification.textContent = message;
-        notification.classList.add("show-notification");
+    document.getElementById('menu-options').addEventListener('click', () => {
+        showSection(optionsSection);
+    });
 
-        setTimeout(() => {
-            notification.classList.remove("show-notification");
-        }, 4000);
+    document.getElementById('menu-terms').addEventListener('click', () => {
+        showSection(termsSection);
+    });
+
+    themeSwitch.addEventListener('change', (event) => {
+        document.body.style.backgroundColor = event.target.value === 'dark' ? '#333' : '#f5f5f5';
+        document.body.style.color = event.target.value === 'dark' ? '#fff' : '#333';
+    });
+
+    function showSection(section) {
+        document.querySelectorAll('.content-section').forEach(sec => sec.style.display = 'none');
+        section.style.display = 'block';
     }
 
-    // Filtro de búsqueda
-    const searchInput = document.getElementById("search");
-    const productsList = document.getElementById("products").children;
+    function loadCatalog() {
+        catalogContainer.innerHTML = ''; // Clear previous items
 
-    searchInput.addEventListener("keyup", function () {
-        const filter = this.value.toLowerCase();
-        for (let product of productsList) {
-            const productName = product.textContent.toLowerCase();
-            product.style.display = productName.includes(filter) ? "" : "none";
+        for (let i = 1; i <= 10; i++) {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+            productDiv.innerHTML = `
+                <h3>Producto ${i}</h3>
+                <div class="product-canvas" id="product-${i}"></div>
+                <p>Descripción del producto ${i}</p>
+                <button>Comprar</button>
+            `;
+            catalogContainer.appendChild(productDiv);
+            initialize3DView(`product-${i}`);
         }
-    });
-});
+    }
 
+    function initialize3DView(containerId) {
+        const container = document.getElementById(containerId);
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(width, height);
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        camera.position.z = 5;
+
+        // Create a simple 3D object
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        const animate = function () {
+            requestAnimationFrame(animate);
+
+            // Rotation animation
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    }
 });
